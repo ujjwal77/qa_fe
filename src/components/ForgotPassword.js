@@ -1,17 +1,13 @@
 import React, { useState } from "react";
-import { NavLink,useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import IconButton from "@mui/material/IconButton";
 import LockIcon from "@mui/icons-material/Lock";
 import PersonIcon from "@mui/icons-material/Person";
+import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
-import axios from "axios";
-// import { ToastContainer, toast } from 'react-toastify';
-// import 'react-toastify/dist/ReactToastify.css';
 
-function Login() {
-
-  const history = useNavigate();
+function ForgotPassword() {
   const [values, setValues] = useState({
     showPassword: false,
   });
@@ -20,14 +16,29 @@ function Login() {
     setValues({ ...values, showPassword: !values.showPassword });
   };
 
+  const [valuesc, setValuesc] = useState({
+    showPasswordc: false,
+  });
+
+  const handleClickShowPasswordc = () => {
+    setValuesc({ ...valuesc, showPasswordc: !valuesc.showPasswordc });
+  };
+
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
+  
+
   const [user, setUser] = useState({
     email: "",
     password: "",
+    password2:"",
   });
 
   let name, value;
 
   const handleChange = (e) => {
+    console.log(e);
     value = e.target.value;
     name = e.target.name;
 
@@ -36,43 +47,16 @@ function Login() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    alert("forgot p working");
   };
-
-  const PostData = (e) => {
-    e.preventDefault();
-
-    const { email, password } = user;
-
-    axios
-      .post(
-        "http://127.0.0.1:8000/auth/login/",
-        `email=${email}&password=${password}`
-      )
-      .then((res) => {
-        console.log(res);
-        
-       if (res.status === 200) {
-          // toast.success("You have been successfully login ! ");
-          alert("welcome to shorthills.ai!!");
-          history("/question");
-        }
-      })
-      .catch((err) => {
-        // console.log(err.response);
-        if (err.status === 400) {
-          // toast.dark("Invalid Credentials");
-        }
-      });
-  };
-
   return (
-    <>
+    <div>
       <div style={{ height: "90px" }}></div>
       <body className="login-container">
         <div id="login-div" className="">
           <div className="fields ">
             <span style={{ width: "100%" }} className="fields-span">
-              Welcome back!
+              Reset Password
             </span>
             <span
               style={{
@@ -81,13 +65,10 @@ function Login() {
                 marginBottom: 1 + "rem",
               }}
             >
-              Sign in and continue your journey.
+              Create a new password to login your account.
             </span>
           </div>
-          <div className="md:max-w-sm md:mx-auto login-box">
-            <span style={{ display: "block" }} className="fields-span">
-              Login
-            </span>
+          <div className="  md:max-w-sm md:mx-auto login-box">
             <form className="login-form" onSubmit={handleSubmit} method="POST">
               <div className="field md:w-full">
                 <label for="email" className=" label">
@@ -97,6 +78,7 @@ function Login() {
                   <PersonIcon />
                   <input
                     className="inputt-area"
+                    required
                     type="email"
                     name="email"
                     id="email"
@@ -108,7 +90,7 @@ function Login() {
               </div>
               <div className="field md:w-full">
                 <label for="password" className="label">
-                  Password
+                  Enter New Password
                 </label>
                 <div
                   className="inputt"
@@ -117,6 +99,7 @@ function Login() {
                   <LockIcon />
                   <input
                     className="inputt-area"
+                    required
                     type={values.showPassword ? "text" : "password"}
                     name="password"
                     id="password"
@@ -127,47 +110,70 @@ function Login() {
                   <IconButton
                     style={{ height: "5px" }}
                     onClick={handleClickShowPassword}
+                    onMouseDown={handleMouseDownPassword}
                   >
                     {values.showPassword ? <Visibility /> : <VisibilityOff />}
                   </IconButton>
                 </div>
               </div>
-            </form>
 
-            <p style={{ cursor: "pointer", textAlign: "right" }}>
-              <NavLink to="/forgotpassword" className="links">
-                Forgot password?
-              </NavLink>
-            </p>
+              <div className="field md:w-full">
+                <label for="password" className="label">
+                  Re-Enter New Password 
+                </label>
+                <div
+                  className="inputt"
+                  style={{ display: "flex", alignItems: "center" }}
+                >
+                  <LockIcon />
+                  <input
+                    className="inputt-area"
+                    required
+                    type={valuesc.showPasswordc ? "text" : "password"}
+                    name="password2"
+                    id="password"
+                    placeholder="Password"
+                    value={user.password2}
+                    onChange={handleChange}
+                  />
+                  <IconButton
+                    style={{ height: "5px" }}
+                    onClick={handleClickShowPasswordc}
+                  >
+                    {valuesc.showPasswordc ? <Visibility /> : <VisibilityOff />}
+                  </IconButton>
+                  
+                </div>
+              </div>
 
               <div className="field" style={{
                 textAlign: "center"}}>
                 <button
                   style={{ cursor: "pointer", textAlign: "center" }}
-                  value="login"
-                  onClick={PostData}
+                  value="resetpassword"
                   className="field form-button mr-20"
                 >
-                  Login
+                  Reset Password
                 </button>
               </div>
-                
-            <p style={{ cursor: "pointer", textAlign: "center" }}>
-              Don't Have An Account ?{" "}
-              <NavLink to="/signup" className="links">
-                SignUp <i class="fa fa-arrow-right"></i>
-              </NavLink>
-            </p>
 
-            <br />
+            </form>
+
+        <br/>
+        <div style={{display:'flex',justifyContent:'space-between',alignItems:'center'}}>
+        <NavLink to="/login" className="links">
+            <p style={{ cursor: "pointer" , textAlign:"center" }}><PersonIcon />login</p>
+        </NavLink>
+        <NavLink to="/signup" className="links">
+            <p style={{ cursor: "pointer" , textAlign:"center" }}><PersonAddIcon />create new account</p>
+        </NavLink>
+        </div>
+
           </div>
         </div>
       </body>
-      {/* <ToastContainer autoClose={5000}/> */}
-      
-      
-    </>
+    </div>
   );
 }
 
-export default Login;
+export default ForgotPassword;
