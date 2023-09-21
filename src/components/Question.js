@@ -1,9 +1,12 @@
-import React from 'react'
-
+import React from 'react';
+import '../Chats.css';
+import ChatContainer from './Chat-Container'
 
 function Question() {
   return (
-    <div>Question1</div>
+    <div className='question'>
+      <ChatContainer/>
+    </div>
   )
 }
 

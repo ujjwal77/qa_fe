@@ -9,7 +9,6 @@ import ForgotPassword from './components/ForgotPassword';
 function App() {
   return (
     <div className="App">
-        welcome
         <Routes>
           <Route path="/login" element={<Login/>}></Route>
           <Route path="/signup" element={<SignUp/>}></Route>
