@@ -18,17 +18,20 @@
   
 .question{
   height: 100vh;
-  background-color: var(--icon-hover-bg);
-
+  background-color: #E5EAF2;
   }
-  
+  /* .chat-container{
+    margin-top: 10px;
+  } */
   /* Chats container styling */
   .chat-box {
     overflow-y: auto;
-    max-height: 100vh;
-    padding-bottom: 150px;
-    background-color: var(--icon-hover-bg);
+    height: 83.5vh;
+    /* padding-bottom: 150px; */
+    background-color: #fffefe;
     border-radius: 10px;
+    width: 50%;
+    margin: 0 auto;
   }
   
   /* Scrollbar styles */
@@ -52,7 +55,6 @@
     flex-direction: column;
     align-items: flex-start;
     margin-top: 10px;
-    
   }
   
   .user-message{
@@ -95,7 +97,8 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    background-color: var(--incoming-chat-bg);
+    /* background-color: var(--incoming-chat-bg); */
+    background-color: #E5EAF2;
     padding: 20px 10px;
     border-top: 1px solid var(--incoming-chat-border);
     border-radius: 10px 10px 0 0;
@@ -122,6 +125,12 @@
     overflow-y: auto;
     background: var(--incoming-chat-bg);
     outline: 1px solid var(--incoming-chat-border);
+    margin-right: 10px;
+  }
+  /* Focus styles */
+  .input-bar:focus {
+    border-color: #007bff; /* Change to your desired focus color */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Add a subtle box-shadow on focus */
   }
   
   .send-button {
@@ -133,8 +142,11 @@
     align-items: center;
     justify-content: center;
     color: var(--icon-color);
+    background: var(--incoming-chat-bg);
     cursor: pointer;
     transition: background-color 0.2s ease-in-out;
+    border-style: none;
+    border: 1px solid;
   }
   
   .send-button:hover {
@@ -142,7 +154,7 @@
   }
   
   .loader-container{
-    width: 100%;
+    width: 80%;
   }
   
   
